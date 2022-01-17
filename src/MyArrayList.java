@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class MyArrayList<E> {
     private int size = 0;
     private static final int DEFAULT_CAPACITY = 2;
@@ -26,7 +28,7 @@ public class MyArrayList<E> {
             index = 0;
         if (index > size)
             index = size;
-        for (int i = index+1; i< size; i++){
+        for (int i = size; i> index; i--){
             elements[i] = elements[i-1];
         }
         elements[index] = element;
@@ -45,9 +47,7 @@ public class MyArrayList<E> {
     }
 
     private void expand() {
-        E[] newArray = (E[]) new Object[elements.length + DEFAULT_CAPACITY];
-        System.arraycopy(elements, 0, newArray, 0, size);
-        elements = newArray;
+        elements = Arrays.copyOf(elements, elements.length + DEFAULT_CAPACITY);
     }
 
     public int getSize() {
